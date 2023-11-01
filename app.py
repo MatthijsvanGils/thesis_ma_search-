@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request, redirect
-from database import load_courses_from_db, add_rating_to_db, remove_rating_from_db, load_carousel_courses_from_db, load_best_courses_from_db, load_explore_courses_from_db, load_compulsory_courses_from_db, load_favorite_courses_from_db
+from database import load_courses_from_db, add_rating_to_db, remove_rating_from_db, load_carousel_courses_from_db, load_best_courses_from_db, load_explore_courses_from_db, load_compulsory_courses_from_db, load_favorite_courses_from_db, search_courses_from_db
 
 app = Flask(__name__)
 
@@ -56,6 +56,12 @@ def show_course(course_code):
 def favorite_courses():
     favorite_courses = load_favorite_courses_from_db()
     return render_template('favourites.html', favorite_courses=favorite_courses)
+
+@app.route("/search", methods=['GET'])
+def search():
+    query = request.args.get('query')
+    results = search_courses_from_db(query)
+    return render_template('search_results.html', query=query, results=results)
 
 @app.route("/interests")
 def get_interests():
