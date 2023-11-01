@@ -145,7 +145,8 @@
     {% include 'navbar.html' %}
 
     <div class="container">
-        <h1>Search Results for "{{ query }}"</h1>
+      <h1 style="font-weight: bold;"><span style="color: black;">Search Results </span><span style="color: #ACBED8;">for "{{ query }}"</span></h1>
+
 
         {% if results %}
           {% for course in results %}
